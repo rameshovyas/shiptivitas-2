@@ -126,9 +126,10 @@ app.put('/api/v1/clients/:id', (req, res) => {
   const client = clients.find(client => client.id === id);
 
   /* ---------- Update code below ----------*/
-
-
-
+  //Update data
+  db.prepare(`update clients set status=${status} and priority=${priority} where id=${id}`)
+  //Fetch updated records again
+  clients = db.prepare('select * from clients').all();
   return res.status(200).send(clients);
 });
 
